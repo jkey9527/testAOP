@@ -1,8 +1,11 @@
+import com.java.helper.UserServiceHelper;
 import com.java.proxy.CglibFactory;
 import com.java.proxy.UserProxy;
 import com.java.service.UserService;
 import com.java.service.UserServiceImpl;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class TestAOP {
 
@@ -29,5 +32,19 @@ public class TestAOP {
         UserService us = (UserService) proxy.createProxy();
         us.add();
         us.update();
+    }
+
+    @Test
+    public void test4(){
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserService userService = (UserService) applicationContext.getBean("proxy");
+        userService.add();
+    }
+
+    @Test
+    public void test5(){
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserService userService = (UserService) applicationContext.getBean("userService");
+        userService.add();
     }
 }

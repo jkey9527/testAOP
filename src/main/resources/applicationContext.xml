@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+        <!--配置增强对象-->
+        <bean id="userService" class="com.java.service.UserServiceImpl"></bean>
+        <!--配置通知-->
+        <bean id="aspect" class="com.java.helper.UserServiceHelper"></bean>
+        <!--false或者不写-默认使用JDK动态代理 true-使用CGLIB动态代理-->
+        <aop:config>
+                <!--配置切入点-->
+                <aop:pointcut id="pointCut" expression="execution(* com.java..*(..))"/>
+                <!--配置切面-->
+                <aop:advisor advice-ref="aspect" pointcut-ref="pointCut"/>
+        </aop:config>
+
+
+
+</beans>

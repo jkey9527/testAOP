@@ -19,8 +19,6 @@ public class UserProxy implements InvocationHandler {
         return Proxy.newProxyInstance(loader,interfaces,this);
     }
 
-
-    @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         //增强方法
         System.out.println("日志打印。。");
